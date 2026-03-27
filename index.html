@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DermoCare | Здоров'я вашої шкіри</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0b0e14;
+            --accent-color: #00d4ff;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-color: #e0e0e0;
+            --secondary-text: #a0a0a0;
+        }
+
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism Reusable Class */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 80px;
+            background: rgba(11, 14, 20, 0.8);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #fff;
+        }
+
+        .logo span { color: var(--accent-color); }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: 400;
+            font-size: 0.95rem;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--accent-color); }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: radial-gradient(circle at 20% 30%, #1a2a44 0%, #0b0e14 70%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero-content span {
+            background: linear-gradient(90deg, #00d4ff, #00ffaa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: var(--secondary-text);
+            font-size: 1.1rem;
+        }
+
+        .btn {
+            padding: 14px 40px;
+            background: var(--accent-color);
+            color: #000;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            display: inline-block;
+            transition: 0.4s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 212, 255, 0.4);
+        }
+
+        /* Diseases Grid */
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 60px;
+            font-weight: 700;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .card-body { padding: 30px; }
+
+        .card-body h3 {
+            margin-bottom: 15px;
+            color: var(--accent-color);
+        }
+
+        .info-list {
+            margin-top: 20px;
+            list-style: none;
+            font-size: 0.9rem;
+            color: var(--secondary-text);
+        }
+
+        .info-list li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .info-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+
+        /* Prevention Section */
+        .prevention-section {
+            background: #0d1117;
+        }
+
+        .tip-box {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .tip-box .icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        /* Contact Form */
+        .contact-wrapper {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 50px;
+        }
+
+        .contact-wrapper h2 { text-align: center; margin-bottom: 30px; }
+
+        .form-group { margin-bottom: 20px; }
+
+        input, textarea {
+            width: 100%;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: #fff;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            border-color: var(--accent-color);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            background: #080a0e;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Menu */
+        .burger {
+            display: none;
+            cursor: pointer;
+        }
+
+        @media screen and (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .burger {
+                display: block;
+            }
+            .hero-content h1 { font-size: 2.8rem; }
+            .section-title { font-size: 2rem; }
+            .contact-wrapper { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">Dermo<span>Care</span></div>
+        <ul class="nav-links">
+            <li><a href="#home">Головна</a></li>
+            <li><a href="#diseases">Захворювання</a></li>
+            <li><a href="#prevention">Профілактика</a></li>
+            <li><a href="#contact">Контакти</a></li>
+        </ul>
+        <div class="burger">
+            <svg width="30" height="20" viewBox="0 0 30 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="30" height="3" rx="1.5" fill="white"/>
+                <rect y="8" width="30" height="3" rx="1.5" fill="white"/>
+                <rect y="16" width="30" height="3" rx="1.5" fill="white"/>
+            </svg>
+        </div>
+    </nav>
+
+    <header id="home" class="hero">
+        <div class="hero-content">
+            <h1>Ваша шкіра заслуговує <br><span>найкращого догляду</span></h1>
+            <p>Сучасний довідник із дерматології: вивчайте симптоми, дотримуйтесь правил профілактики та зберігайте здоров'я.</p>
+            <a href="#diseases" class="btn">Дізнатися більше</a>
+        </div>
+    </header>
+
+    <section id="diseases" class="container">
+        <h2 class="section-title">Каталог захворювань</h2>
+        <div class="grid">
+            <div class="card glass">
+                <img src="https://images.unsplash.com/photo-1612119276562-79e1156221aa?q=80&w=400&auto=format&fit=crop" alt="Дерматит">
+                <div class="card-body">
+                    <h3>Атопічний дерматит</h3>
+                    <p>Хронічне рецидивуюче захворювання, що вражає захисний бар'єр шкіри.</p>
+                    <ul class="info-list">
+                        <li><strong>Симптоми:</strong> Свербіж, сухість, еритема.</li>
+                        <li><strong>Лікування:</strong> Емоленти та місцева терапія.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card glass">
+                <img src="https://images.unsplash.com/photo-1596704017254-9b121068fb31?q=80&w=400&auto=format&fit=crop" alt="Акне">
+                <div class="card-body">
+                    <h3>Акне</h3>
+                    <p>Запальний стан сально-волосяних фолікулів, поширений серед молоді.</p>
+                    <ul class="info-list">
+                        <li><strong>Симптоми:</strong> Папули, пустули, комедони.</li>
+                        <li><strong>Лікування:</strong> Системні ретиноїди та догляд.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card glass">
+                <img src="https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?q=80&w=400&auto=format&fit=crop" alt="Екзема">
+                <div class="card-body">
+                    <h3>Екзема</h3>
+                    <p>Гостре або хронічне запалення, схильне до частих загострень.</p>
+                    <ul class="info-list">
+                        <li><strong>Симптоми:</strong> Пухирці, печіння, набряк.</li>
+                        <li><strong>Лікування:</strong> Антигістамінні та дієтотерапія.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="prevention" class="prevention-section">
+        <div class="container">
+            <h2 class="section-title">Золоті правила догляду</h2>
+            <div class="grid">
+                <div class="tip-box glass">
+                    <span class="icon">🧼</span>
+                    <h4>М'яке очищення</h4>
+                    <p>Використовуйте засоби без агресивних ПАР, щоб не пошкоджувати ліпідний шар.</p>
+                </div>
+                <div class="tip-box glass">
+                    <span class="icon">🛡️</span>
+                    <h4>SPF захист</h4>
+                    <p>Захищайте шкіру від UV-променів навіть взимку для профілактики меланоми.</p>
+                </div>
+                <div class="tip-box glass">
+                    <span class="icon">🥗</span>
+                    <h4>Здорове харчування</h4>
+                    <p>Багата на антиоксиданти дієта допомагає шкірі відновлюватися швидше.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="container">
+        <div class="contact-wrapper glass">
+            <h2>Отримати консультацію</h2>
+            <form id="contactForm">
+                <div class="form-group">
+                    <input type="text" id="name" placeholder="Ваше ім'я" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" placeholder="Email адреса" required>
+                </div>
+                <div class="form-group">
+                    <textarea id="message" rows="5" placeholder="Ваше запитання щодо симптомів..."></textarea>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Надіслати запит</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 DermoCare Project. Побудовано з використанням сучасних веб-технологій.</p>
+        <p style="margin-top: 10px;">Volyn, Ukraine</p>
+    </footer>
+
+    <script>
+        // Form Handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const submitBtn = this.querySelector('button');
+            const originalText = submitBtn.textContent;
+            
+            submitBtn.textContent = 'Обробка...';
+            submitBtn.style.opacity = '0.7';
+
+            // Simulate API call
+            setTimeout(() => {
+                alert('Повідомлення успішно надіслано! Ми зв’яжемося з вами найближчим часом.');
+                this.reset();
+                submitBtn.textContent = originalText;
+                submitBtn.style.opacity = '1';
+            }, 1200);
+        });
+
+        // Simple Navbar highlighting
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section, header');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let current = "";
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 120) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.color = link.getAttribute('href').includes(current) 
+                    ? 'var(--accent-color)' 
+                    : 'var(--text-color)';
+            });
+        });
+
+        // Mobile Menu Toggle
+        const burger = document.querySelector('.burger');
+        const nav = document.querySelector('.nav-links');
+
+        burger.addEventListener('click', () => {
+            alert('Мобільне меню в розробці. Використовуйте скрол для навігації!');
+        });
+    </script>
+</body>
+  </html>
+  
